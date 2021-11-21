@@ -4,12 +4,12 @@ const Router = require('./routes/index');
 const port = process.env.PORT || 5001;
 app.use(express.json())
 app.use('/api', Router)
-// app.get('/', (req, res) => {
-//     res.json({ 
-//         message: "Welcome to inventory management application.",
-//         "instruction": "type products after localhost"
-//     });
-// })
+app.get("/", (req, res) => {
+    return res.status(200).json({
+      status: "success",
+      message: "welcome to Warehouse System",
+    });
+  });
 app.get('*', (req, res) => {
     res.status(404).json({
         status: "failed",

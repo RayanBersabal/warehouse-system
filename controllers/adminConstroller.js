@@ -1,4 +1,4 @@
-const {users} = require('../models');
+const { admin } = require('../models');
 const Joi = require('joi');
 const jwt = require('../middlewares/jwt')
 const bcrypt = require('../middlewares/bcrypt')
@@ -25,7 +25,7 @@ module.exports = {
                     errors : check.error["details"].map(({ message }) => message )
                 })
             }
-            const checkemail = await users.findOne({
+            const checkemail = await admin.findOne({
                 where: {
                     email: body.email
                 }
@@ -39,7 +39,7 @@ module.exports = {
             }
             const hashedPassword = bcrypt.encrypt(body.password)
 
-            const user = await users.create({
+            const user = await admin.create({
                 username : body.username,
                 email : body.email,
                 password : hashedPassword
@@ -82,7 +82,7 @@ module.exports = {
                 })
             }
 
-            const checkemail = await users.findOne({
+            const checkemail = await admin.findOne({
                 where: {
                     email: body.email
                 }
@@ -117,30 +117,6 @@ module.exports = {
                         message: "Login successfully",
                         token: token,
                     });
-
-        } catch (error) {
-            return res.status(500).json({
-                status: 'failed',
-                message: error.message || 'Internal Server Error',
-            });
-        }
-    },
-    getUser: async (req, res) => {
-        try {
-            const UsersData = await users.findAll(); 
-            
-            //check jika data user sudah ada nilai/isi nya di table
-            if(!UsersData) {
-                return res.status(400).json({
-                    status : "failed",
-                    message : "Data Not Found"
-                });
-            }
-            return res.status(200).json({
-                status : "success",
-                message : "Succesfully retrieved data Users",
-                data: UsersData
-            });
 
         } catch (error) {
             return res.status(500).json({

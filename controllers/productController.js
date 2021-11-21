@@ -5,16 +5,13 @@ module.exports = {
     getAllProduct: async (req, res) => {
         try {
             const search = req.query.search ? req.query.search : '';
-            const limit = 4;
-            const page = parseInt(req.query.page);
-            const offset = limit * (page - 1);
             const GetProduct = await products.findAll({
                 attributes: { exclude: ['createdAt', 'updatedAt'] },
                 limit: limit,
                 offset: offset,
                 where: {
                         [Op.or]: [{
-                            productName: {
+                            name: {
                                [ Op.iLike]: '%' +search+'%'
                             }
                         },
@@ -31,20 +28,11 @@ module.exports = {
                     message: "failed to get products data"
                 })
             }
-            const count = await products.count({ distinct: true });
-            let next = page + 1;
-            if (page * limit >= count) {
-                next = 0;
-            }
+            
             return res.status(200).json({
                 status: "success",
                 message: "successfully get products data",
-                data: GetProduct,
-                meta: {
-                    page: page,
-                    next: next,
-                    total: count,
-                },
+                data: GetProduct
             })
         } catch (error) {
             return res.status(500).json({
@@ -82,13 +70,13 @@ module.exports = {
         const body = req.body;
         try {
             const schema = Joi.object({
-                productName: Joi.string().required(),
+                name: Joi.string().required(),
                 stock: Joi.number().required(),
                 price: Joi.number().required(),
                 category: Joi.string().required()
             })
             const check = schema.validate({
-                productName: body.productName,
+                name: body.name,
                 stock: body.stock,
                 price: body.price,
                 category: body.category
@@ -100,7 +88,7 @@ module.exports = {
                 })
             }
             const PostProduct = await products.create({
-                productName: body.productName,
+                name: body.name,
                 stock: body.stock,
                 price: body.price,
                 category: body.category
@@ -128,13 +116,13 @@ module.exports = {
         const id = req.params.id
         try {
             const schema = Joi.object({
-                productName: Joi.string().required(),
+                name: Joi.string().required(),
                 stock: Joi.number().required(),
                 price: Joi.number().required(),
                 category: Joi.string().required()
             })
             const check = schema.validate({
-                productName: body.productName,
+                name: body.name,
                 stock: body.stock,
                 price: body.price,
                 category: body.category
@@ -146,7 +134,7 @@ module.exports = {
                 })
             }
             await products.update({
-                productName: body.productName,
+                name: body.name,
                 stock: body.stock,
                 price: body.price,
                 category: body.category
@@ -155,7 +143,7 @@ module.exports = {
                     id: id
                 }
             })
-            const editedProduct = await exercises.findByPk(id);
+            const editedProduct = await products.findByPk(id);
             if (!editedProduct) {
                 return res.status(400).json({
                     status: 'failed',
