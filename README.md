@@ -36,14 +36,12 @@ $ npm install
 ### Create Environment Variable
 Create new file .env on your favorite code editor, and copy paste this code below :
 ```
-PORT ="YOUR SERVER PORT"
-
-DB_HOST = "YOUR DB HOST"
 DB_USER = "YOUR DB USER"
 DB_PASS = "YOUR DB PASSWORD"
-DB_NAME = "YOUR DB NAME'
-
-JWT_KEY= "A SCRETKEY FOR JWT"
+DB_NAME = "YOUR DB NAME"
+DB_HOST = "YOUR DB HOST"
+SECRET_KEY_JWT = "A SCRETKEY FOR JWT"
+PORT = "YOUR SERVER PORT"
 ```
 ### Start Development Server
 ```
