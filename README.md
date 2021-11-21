@@ -74,10 +74,7 @@ $ npm start
  1. "/products" => Display products, with default pagination {page: 1, limit: 3}. 
     a. Options Query:
        1) search -> {input: search keywords}, search products that have {input} in their title.
-       2) sortby -> {input: column name}, sort products based on {input} with default {id}.
-       3) sort   -> {input: asc / desc}, sort products ascending or descending based on {input}.
-       4) page	 -> {input: number}, display page based on {input}.
-       5) limit  -> {input: number}, config how many product displayed on page.
+       2) page	 -> {input: number}, display page based on {input}.
 
  2. "/products/:id" => Display product with {id}.
 ```

@@ -4,7 +4,7 @@ const jwt = require('../middlewares/jwt')
 const bcrypt = require('../middlewares/bcrypt')
 
 module.exports = {
-    signup: async (req, res) => {
+    register: async (req, res) => {
         const body = req.body;
         try {
             const schema = Joi.object({
@@ -65,7 +65,7 @@ module.exports = {
             });
         }
     },
-    signin: async (req, res) =>{
+    login: async (req, res) =>{
         const body = req.body;
         try {
             const schema = Joi.object({
