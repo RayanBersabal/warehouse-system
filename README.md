@@ -90,7 +90,7 @@ $ npm start
        1) name: string
        2) stock: number
        3) price: number
-       4) category: number
+       4) category: string
 ```
 
 #### PUT Request
@@ -99,21 +99,10 @@ $ npm start
     a. Required Header: { authorization: token : Token }
     b. Required Body: 
        1) name: string
-       2) description: string
-       3) image: string //image url
-       4) id_category: number
-       5) quantity: number
+       2) stock: number
+       3) price: number
+       4) category: number
  ```
-
-#### PATCH Request
-```
- 1. "/products/quantity/" => Add or reduce product quantity with {id}.
-    a. Required Header : { authorization: token }
-    b. Required Body:
-       1) act: add/reduce
-       2) id: number
-       3) value: number
-```
 
 #### DELETE Request
 ```
