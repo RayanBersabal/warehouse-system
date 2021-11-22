@@ -8,12 +8,10 @@ module.exports = {
         const body = req.body;
         try {
             const schema = Joi.object({
-                username: Joi.string().required(),
                 email: Joi.string().required(),
                 password: Joi.string().min(6).max(12).required(),
             })
             const check = schema.validate({
-                username : body.username,
                 email : body.email,
                 password : body.password
             }, { abortEarly : false });
@@ -40,7 +38,6 @@ module.exports = {
             const hashedPassword = bcrypt.encrypt(body.password)
 
             const user = await admin.create({
-                username : body.username,
                 email : body.email,
                 password : hashedPassword
             })
