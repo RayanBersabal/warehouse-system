@@ -1,4 +1,4 @@
-const { admins } = require('../models');
+const { admin } = require('../models');
 const Joi = require('joi');
 const jwt = require('../middlewares/jwt')
 const bcrypt = require('../middlewares/bcrypt')
@@ -23,7 +23,7 @@ module.exports = {
                     errors : check.error["details"].map(({ message }) => message )
                 })
             }
-            const checkemail = await admins.findOne({
+            const checkemail = await admin.findOne({
                 where: {
                     email: body.email
                 }
@@ -37,7 +37,7 @@ module.exports = {
             }
             const hashedPassword = bcrypt.encrypt(body.password)
 
-            const user = await admins.create({
+            const user = await admin.create({
                 email : body.email,
                 password : hashedPassword
             })
@@ -79,7 +79,7 @@ module.exports = {
                 })
             }
 
-            const checkemail = await admins.findOne({
+            const checkemail = await admin.findOne({
                 where: {
                     email: body.email
                 }
