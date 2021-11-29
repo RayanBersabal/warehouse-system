@@ -1,7 +1,8 @@
 const express = require('express');
-const app = express();
 const cors = require('cors')
+const app = express();
 const Router = require('./routes/index');
+
 app.use(cors())
 app.use(express.json())
 app.use('/api', Router)
@@ -17,8 +18,4 @@ app.get('*', (req, res) => {
         message: "Not Found"
     })
 })
-const port = process.env.PORT || 5001;
-
-app.listen(port, () => {
-    console.log('Listening on port', port);
-});
+module.exports = app 
