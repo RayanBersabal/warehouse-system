@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const secretKey = process.env.SECRET_KEY_JWT;
+const secretKey = process.env.JWT_SECRET_KEY;
 
 async function loginCheck(req, res, next) {
     const bearerToken = req.header('Authorization');

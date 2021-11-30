@@ -1,6 +1,6 @@
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
-const secretKey = process.env.SECRET_KEY_JWT;
+const secretKey = process.env.JWT_SECRET_KEY;
 
 // function untuk membuat token pada saat signin
 function generateToken(dataUser = {}) {
